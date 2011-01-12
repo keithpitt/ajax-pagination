@@ -1,0 +1,19 @@
+<% if results.any? %>
+
+  <%= paginated_section results do %>
+    <table>
+      <% results.each do |game| %>
+        <tr>
+          <td><%= link_to game.title, game.url, :target => '_blank' %></td>
+        </tr>
+      <% end %>
+    </table>
+  <% end %>
+
+  <%= page_entries_info results %>
+
+<% else %>
+
+  <p>Could not locate any games that match that name.</p>
+
+<% end %>

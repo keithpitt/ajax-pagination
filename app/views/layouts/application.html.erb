@@ -8,7 +8,14 @@
 </head>
 <body>
 
-<%= yield %>
+  <h1><%= link_to "Ajax Pagination Example", root_path %></h1>
+
+  <form action="<%= search_path %>">
+    <input type="text" name="q" />
+    <input type="submit" value="Search" />
+  </form>
+
+  <%= yield %>
 
 </body>
 </html>

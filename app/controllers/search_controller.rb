@@ -4,8 +4,7 @@ class SearchController < ApplicationController
     @query = params[:q]
 
     if @query.present?
-      @results = Game.search(params[:q])
-
+      @results = Game.search(@query).paginate :page => params[:page], :per_page => 10
     else
       redirect_to :root
     end
