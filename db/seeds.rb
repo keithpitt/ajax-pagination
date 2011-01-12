@@ -5,3 +5,7 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+games = YAML.load_file( Rails.root.join('db', 'games.yml') )
+Game.create games
+puts "Created #{games.length} games..."
