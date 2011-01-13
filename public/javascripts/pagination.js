@@ -3,7 +3,7 @@ $('.ajax-results').live('submit', function() {
   var action = $(this).attr('action');
   var params = $(this).serialize();
   if(Paginator.hasPushSupport())
-    window.location = action + params;
+    window.location = action + '?' + params;
   else
     window.location = action + '#/?' + params;
   return false;
@@ -12,7 +12,7 @@ $('.ajax-results').live('submit', function() {
 var Paginator = {
 
   init: function(searchPath) {
-    if(!this.hasPushSupport() && !window.location.search) {
+    if(this.hasPushSupport() || !window.location.search) {
       this.path = searchPath || window.location.path;
       this.setup();
     }
