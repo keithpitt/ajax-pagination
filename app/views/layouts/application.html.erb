@@ -5,17 +5,20 @@
   <%= stylesheet_link_tag :all %>
   <%= javascript_include_tag 'jquery.min', 'jquery.address.min', 'rails', 'pagination' %>
   <%= csrf_meta_tag %>
+  <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
+  <div class="container">
 
-  <h1><%= link_to "Ajax Pagination Example", root_path %></h1>
+    <h1><%= link_to "Ajax Pagination Example", root_path %></h1>
 
-  <form action="<%= search_path %>" class="ajax-results">
-    <input type="text" name="q" />
-    <input type="submit" value="Search" />
-  </form>
+    <form action="<%= search_path %>" class="ajax-results">
+      <input type="text" name="q" id="search" placeholder="Type the name of a video game in here" value="<%= params[:q] %>" />
+      <input type="submit" value="Search" />
+    </form>
 
-  <%= yield %>
+    <%= yield %>
 
+  </div>
 </body>
 </html>
