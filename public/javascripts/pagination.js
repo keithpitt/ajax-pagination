@@ -23,6 +23,7 @@ var Paginator = {
     $.address.state('/');
 
     $.address.change(function(event) {
+      $('#search').val(event.parameters.q);
       $.ajax({
         url: window.location.path,
         data: event.parameters,
