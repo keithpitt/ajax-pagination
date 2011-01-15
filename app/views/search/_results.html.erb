@@ -1,15 +1,21 @@
 <% if results.any? %>
 
-  <%= paginated_section results do %>
+  <div id="table">
+    <div class="left"></div>
     <table>
       <% results.each do |game| %>
         <tr>
-          <td><%= link_to game.title, game.url, :target => '_blank' %></td>
+          <td><%= link_to game.title, game.url %></td>
         </tr>
       <% end %>
     </table>
-  <% end %>
+    <div class="right"></div>
+  </div>
 
-  <%= page_entries_info results %>
+  <%= will_paginate results %>
+
+  <div class="page-entries">
+    <%= page_entries_info results %>
+  </div>
 
 <% end %>

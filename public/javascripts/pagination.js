@@ -23,7 +23,6 @@ var Paginator = {
     $.address.state('/');
 
     $.address.change(function(event) {
-      $('#results').html('Loading...');
       $.ajax({
         url: window.location.path,
         data: event.parameters,
