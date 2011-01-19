@@ -232,3 +232,24 @@ input:-moz-placeholder {
   padding: 0;
 }
 
+#loading {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  padding: 10px 0px;
+  width: 130px;
+  margin-left: -65px;
+  text-align: center;
+  z-index: 9;
+
+  -moz-border-radius-topleft: 15px;
+  -moz-border-radius-topright: 15px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+
+  background: rgba(0,0,0,0.8);
+  color: white;
+
+  -moz-box-shadow: 0 1px 3px #000000;
+  -webkit-box-shadow: 0 1px 3px #000000;
+}

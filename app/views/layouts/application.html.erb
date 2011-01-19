@@ -1,25 +1,71 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Better Ajax Pagination</title>
+  <title>Better Ajax Pagination (Cross Browser)</title>
   <%= stylesheet_link_tag :all %>
-  <%= javascript_include_tag 'jquery.min', 'jquery.address.min', 'rails', 'pagination' %>
+  <%= javascript_include_tag 'jquery.min', 'jquery.address.min', 'rails' %>
   <%= csrf_meta_tag %>
   <link href='http://fonts.googleapis.com/css?family=Droid+Sans' rel='stylesheet' type='text/css'>
 </head>
 <body>
   <div class="container">
 
-    <h1><%= link_to "Better Ajax Pagination", root_path %></h1>
-    <p>This pagination example works across all browers, and degrades gracefully.</p>
+    <h1><%= link_to "Better Ajax Pagination (Cross Browser)", root_path %></h1>
+    <p>This example uses the <a href="http://www.asual.com/jquery/address/">jQuery Address</a> plugin, which works across all browers.</p>
     <p>Grab the source code <a href="http://github.com/keithpitt/ajax-pagination">here</a></p>
+
+    <div id="loading" style="display: none">Loading...</div>
 
     <form action="<%= search_path %>" class="ajax-results">
       <input type="text" name="q" id="search" autocomplete="" placeholder="Search for a video game" value="<%= params[:q] %>" />
       <input type="submit" id="button" value="Search" />
     </form>
 
-    <%= yield %>
+    <div id="content">
+      <%= yield %>
+    </div>
+
+    <script type="text/javascript">
+
+      $.address.state('/');
+
+      $.address.change(function(event) {
+
+        if($.isEmptyObject(event.parameters))
+          return;
+
+        $('#search').val(event.parameters.q);
+
+        $('#loading').slideToggle('fast', function() {
+          $.ajax({
+            url: event.path,
+            data: event.parameters,
+            success: function(html) {
+              $('#loading').slideToggle('fast');
+              $('#content').html(html);
+            }
+          })
+        });
+
+      });
+
+      $('form').live('submit', function() {
+        var action = $(this).attr('action'),
+            params = $(this).serialize();
+
+        $.address.value(action + '?' + params);
+
+        return false;
+      })
+
+      $('.pagination a').live('click', function() {
+        var href = $(this).attr('href');
+
+        $.address.value(href);
+        return false;
+      })
+
+    </script>
 
   </div>
 </body>
